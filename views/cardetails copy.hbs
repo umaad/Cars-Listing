@@ -1,0 +1,67 @@
+<style>
+    .car-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.car-details img {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.car-details h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.car-details p {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.car-details strong {
+  font-weight: bold;
+}
+
+.car-details {
+  max-width: 800px;
+  width: 100%;
+}
+
+
+</style>
+
+
+<div class="car-details">
+  <img src="{{car.image1}}" alt="{{car.make}} {{car.model}}">
+  <h2>{{car.make}} {{car.model}} ({{car.year}})</h2>
+  <p><strong>VIN:</strong> {{car.vin}}</p>
+  <p><strong>Color:</strong> {{car.color}}</p>
+  <p><strong>KM:</strong> {{car.km}}</p>
+  <p><strong>Price:</strong> {{car.price}}</p> <br>
+
+  
+  <button class="delete-btn">Delete Item</button> <br>
+  <a href="http://localhost:3000/cars">Go back</a>
+  
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $('.delete-btn').click(function() {
+    $.ajax({
+      url: 'http://localhost:3000/cars/{{car.vin}}', // replace with your API endpoint
+      type: 'DELETE',
+      success: function(result) {
+        console.log('Item deleted successfully');
+        // add your own code to update the UI
+      },
+      error: function(error) {
+        console.error('Error deleting item:', error);
+      }
+    });
+    location.replace('http://localhost:3000/cars/')
+  });
+</script>
